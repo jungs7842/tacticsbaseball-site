@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tacticsbaseball.graybits.co.kr/sitemap.xml
