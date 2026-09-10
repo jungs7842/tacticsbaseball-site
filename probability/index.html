@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>확률정보 | 작전야구매니저</title>
+<meta name="description" content="작전야구매니저의 드래프트, 스카우트, 선수조합 및 확률형 아이템의 확률정보입니다.">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#05070b">
+<style>
+:root{
+  --bg:#05070b;--panel:#0b1018;--panel2:#0f1622;--line:rgba(255,255,255,.12);
+  --white:#fff;--muted:#aeb8c7;--blue:#133eff;--cyan:#00d5ff;--red:#ef2434;
+  --shell:min(1180px,calc(100% - 28px));--shadow:0 24px 70px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{
+  margin:0;background:var(--bg);color:#fff;
+  font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",Arial,sans-serif;
+  word-break:keep-all;-webkit-font-smoothing:antialiased
+}
+button,input,select{font:inherit}
+.shell{width:var(--shell);margin:0 auto}
+.site-header{
+  position:sticky;top:0;z-index:30;height:64px;display:flex;align-items:center;
+  background:rgba(5,7,11,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-weight:900;letter-spacing:-.04em}
+.header-label{font-size:13px;color:var(--muted)}
+.hero{padding:52px 0 26px}
+.eyebrow{font-size:12px;font-weight:900;letter-spacing:.18em;color:#7be7ff;margin:0 0 12px}
+h1{font-size:clamp(34px,6vw,58px);letter-spacing:-.055em;margin:0 0 14px}
+.lead{margin:0;color:var(--muted);line-height:1.75;font-size:15px}
+.update{margin-top:12px;color:#7f8a9a;font-size:12px}
+.category-tabs{display:flex;gap:8px;flex-wrap:wrap;padding:22px 0 12px}
+.tab{
+  border:1px solid var(--line);background:rgba(255,255,255,.05);color:#dbe4ef;
+  min-height:40px;padding:0 16px;border-radius:999px;font-weight:800;cursor:pointer
+}
+.tab.active{background:#fff;color:#080b10;border-color:#fff}
+.content-grid{
+  display:grid;grid-template-columns:260px minmax(0,1fr);gap:22px;padding:14px 0 70px
+}
+.content-list{
+  position:sticky;top:84px;align-self:start;background:var(--panel);
+  border:1px solid var(--line);border-radius:16px;padding:8px;box-shadow:var(--shadow)
+}
+.content-btn{
+  width:100%;border:0;background:transparent;color:#c7d0dc;text-align:left;
+  padding:13px 14px;border-radius:10px;font-weight:800;cursor:pointer
+}
+.content-btn:hover{background:rgba(255,255,255,.06)}
+.content-btn.active{background:linear-gradient(135deg,#14234a,#102c5d);color:#fff}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:18px;
+  overflow:hidden;box-shadow:var(--shadow);margin-bottom:18px
+}
+.card-head{padding:20px 20px 14px;border-bottom:1px solid var(--line)}
+.card-head h2,.card-head h3{margin:0;letter-spacing:-.035em}
+.card-head h2{font-size:24px}.card-head h3{font-size:18px}
+.card-head p{margin:8px 0 0;color:var(--muted);font-size:13px}
+.table-wrap{overflow:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:separate;border-spacing:0;width:100%;min-width:720px;font-size:12px}
+th,td{padding:10px 12px;text-align:center;border-right:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);white-space:nowrap}
+th{position:sticky;top:0;background:#152033;color:#fff;font-weight:900;z-index:1}
+tbody tr:hover td{background:rgba(255,255,255,.025)}
+td:last-child,th:last-child{border-right:0}
+.controls{
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:14px 18px;
+  border-bottom:1px solid var(--line);background:var(--panel2)
+}
+.search{
+  flex:1 1 220px;background:#070b11;border:1px solid var(--line);color:#fff;
+  border-radius:9px;min-height:40px;padding:0 12px;outline:none
+}
+.select{
+  background:#070b11;border:1px solid var(--line);color:#fff;border-radius:9px;
+  min-height:40px;padding:0 10px
+}
+.pager{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px 18px;color:var(--muted);font-size:12px
+}
+.pager-actions{display:flex;gap:8px}
+.page-btn{
+  border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;
+  border-radius:8px;min-height:34px;padding:0 12px;cursor:pointer
+}
+.page-btn:disabled{opacity:.35;cursor:default}
+.notice{
+  margin:0 0 18px;padding:14px 16px;border-radius:12px;
+  background:rgba(19,62,255,.11);border:1px solid rgba(77,126,255,.26);
+  color:#cbd8ff;font-size:13px;line-height:1.6
+}
+.loading{padding:60px 20px;text-align:center;color:var(--muted)}
+.footer{padding:28px 0 40px;color:#778291;font-size:11px;border-top:1px solid var(--line)}
+@media(max-width:840px){
+  .content-grid{grid-template-columns:1fr}
+  .content-list{position:static;display:flex;overflow:auto;white-space:nowrap}
+  .content-btn{width:auto;flex:0 0 auto}
+  .header-label{display:none}
+  .hero{padding-top:34px}
+  table{font-size:11px;min-width:680px}
+  th,td{padding:9px 10px}
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="shell header-inner">
+    <div class="brand">KBO 작전야구매니저</div>
+    <div class="header-label">확률정보</div>
+  </div>
+</header>
+
+<main class="shell">
+  <section class="hero">
+    <p class="eyebrow">PROBABILITY INFORMATION</p>
+    <h1>확률정보</h1>
+    <p class="lead">드래프트, 스카우트, 선수조합 및 확률형 아이템의 획득 확률을 확인할 수 있습니다.</p>
+    <div class="update" id="updateText"></div>
+  </section>
+
+  <nav class="category-tabs" id="categoryTabs" aria-label="확률정보 카테고리"></nav>
+
+  <div class="content-grid">
+    <aside class="content-list" id="contentList"></aside>
+    <section id="contentArea">
+      <div class="loading">확률정보를 불러오는 중입니다.</div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="shell">© GRAYBITS. All rights reserved.</div>
+</footer>
+
+<script>
+const state={
+  manifest:null,
+  category:null,
+  current:null,
+  data:null,
+  page:1,
+  pageSize:100,
+  search:"",
+  filters:{}
+};
+
+const el={
+  tabs:document.getElementById("categoryTabs"),
+  list:document.getElementById("contentList"),
+  area:document.getElementById("contentArea"),
+  update:document.getElementById("updateText")
+};
+
+function esc(v){
+  return String(v ?? "").replace(/[&<>"']/g,s=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[s]));
+}
+function isProbabilityHeader(h){ return /확률/.test(String(h)); }
+function formatValue(v,h){
+  if(isProbabilityHeader(h) && typeof v==="number"){
+    let pct=v*100;
+    let s=pct.toFixed(6).replace(/0+$/,"").replace(/\.$/,"");
+    return s+"%";
+  }
+  if(h==="등급" && v!=="" && v!=null) return esc(v)+"성";
+  return esc(v);
+}
+function tableHTML(block){
+  if(!block || !block.headers || !block.rows) return "";
+  const heads=block.headers.map(h=>`<th>${esc(h)}</th>`).join("");
+  const rows=block.rows.map(r=>`<tr>${block.headers.map((h,i)=>`<td>${formatValue(r[i],h)}</td>`).join("")}</tr>`).join("");
+  return `<div class="table-wrap"><table><thead><tr>${heads}</tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+function filteredDetail(){
+  const d=state.data.detail;
+  if(!d) return [];
+  const q=state.search.trim().toLowerCase();
+  return d.rows.filter(row=>{
+    if(q && !row.some(v=>String(v??"").toLowerCase().includes(q))) return false;
+    for(const [idx,val] of Object.entries(state.filters)){
+      if(val && String(row[Number(idx)]??"")!==val) return false;
+    }
+    return true;
+  });
+}
+function buildFilterOptions(){
+  const d=state.data.detail;
+  if(!d) return [];
+  const preferred=["옵션","회차","슬롯","기준구단","구분"];
+  const filters=[];
+  preferred.forEach(name=>{
+    const idx=d.headers.indexOf(name);
+    if(idx<0) return;
+    const values=[...new Set(d.rows.map(r=>String(r[idx]??"")).filter(Boolean))];
+    if(values.length>1 && values.length<=50) filters.push({idx,name,values});
+  });
+  return filters;
+}
+function renderDetail(){
+  const d=state.data.detail;
+  const rows=filteredDetail();
+  const total=rows.length;
+  const pages=Math.max(1,Math.ceil(total/state.pageSize));
+  if(state.page>pages) state.page=pages;
+  const start=(state.page-1)*state.pageSize;
+  const pageRows=rows.slice(start,start+state.pageSize);
+  const block={headers:d.headers,rows:pageRows};
+
+  const filters=buildFilterOptions();
+  const filterHTML=filters.map(f=>{
+    const current=state.filters[f.idx]||"";
+    return `<select class="select detail-filter" data-idx="${f.idx}">
+      <option value="">${esc(f.name)} 전체</option>
+      ${f.values.map(v=>`<option value="${esc(v)}"${current===v?" selected":""}>${esc(v)}</option>`).join("")}
+    </select>`;
+  }).join("");
+
+  return `
+    <div class="card">
+      <div class="card-head">
+        <h3>선수별 상세 확률</h3>
+        <p>검색 및 조건 선택 후 상세 확률을 확인할 수 있습니다.</p>
+      </div>
+      <div class="controls">
+        <input class="search" id="detailSearch" type="search" value="${esc(state.search)}" placeholder="선수명, 팀, 포지션 등 검색">
+        ${filterHTML}
+        <select class="select" id="pageSize">
+          ${[50,100,200,500].map(n=>`<option value="${n}"${state.pageSize===n?" selected":""}>${n}개씩</option>`).join("")}
+        </select>
+      </div>
+      ${tableHTML(block)}
+      <div class="pager">
+        <span>${total.toLocaleString()}개 중 ${total?start+1:0}-${Math.min(start+state.pageSize,total).toLocaleString()} 표시</span>
+        <div class="pager-actions">
+          <button class="page-btn" id="prevPage" ${state.page<=1?"disabled":""}>이전</button>
+          <span>${state.page} / ${pages}</span>
+          <button class="page-btn" id="nextPage" ${state.page>=pages?"disabled":""}>다음</button>
+        </div>
+      </div>
+    </div>`;
+}
+function wireDetail(){
+  const search=document.getElementById("detailSearch");
+  if(search){
+    search.addEventListener("input",e=>{
+      state.search=e.target.value; state.page=1; refreshDetailOnly();
+    });
+  }
+  document.querySelectorAll(".detail-filter").forEach(sel=>{
+    sel.addEventListener("change",e=>{
+      state.filters[e.target.dataset.idx]=e.target.value; state.page=1; refreshDetailOnly();
+    });
+  });
+  const ps=document.getElementById("pageSize");
+  if(ps) ps.addEventListener("change",e=>{ state.pageSize=Number(e.target.value); state.page=1; refreshDetailOnly(); });
+  const prev=document.getElementById("prevPage");
+  const next=document.getElementById("nextPage");
+  if(prev) prev.addEventListener("click",()=>{ if(state.page>1){state.page--;refreshDetailOnly();}});
+  if(next) next.addEventListener("click",()=>{state.page++;refreshDetailOnly();});
+}
+function refreshDetailOnly(){
+  const holder=document.getElementById("detailHolder");
+  if(holder){ holder.innerHTML=renderDetail(); wireDetail(); }
+}
+function renderContent(){
+  const d=state.data;
+  const summary = d.summary ? `
+    <div class="card">
+      <div class="card-head">
+        <h3>요약</h3>
+        <p>개별 선수 확률을 등급·선수종류 및 적용 조건 기준으로 합산한 값입니다.</p>
+      </div>
+      ${tableHTML(d.summary)}
+    </div>` : "";
+
+  el.area.innerHTML=`
+    <div class="notice">표시되는 확률은 해당 콘텐츠의 현재 적용 데이터를 기준으로 합니다. 선수별 상세 확률은 아래에서 확인할 수 있습니다.</div>
+    <div class="card">
+      <div class="card-head"><h2>${esc(d.name)}</h2></div>
+    </div>
+    ${summary}
+    <div id="detailHolder">${renderDetail()}</div>`;
+  wireDetail();
+}
+async function loadContent(item){
+  state.current=item;
+  state.page=1;state.search="";state.filters={};
+  document.querySelectorAll(".content-btn").forEach(b=>b.classList.toggle("active",b.dataset.name===item.name));
+  el.area.innerHTML=`<div class="loading">${esc(item.name)} 정보를 불러오는 중입니다.</div>`;
+  try{
+    const res=await fetch(item.file,{cache:"no-store"});
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    state.data=await res.json();
+    renderContent();
+  }catch(err){
+    el.area.innerHTML=`<div class="notice">확률정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</div>`;
+    console.error(err);
+  }
+}
+function renderContentList(){
+  const items=state.manifest.contents.filter(x=>x.category===state.category);
+  el.list.innerHTML=items.map((x,i)=>`<button class="content-btn${state.current?.name===x.name?" active":""}" data-name="${esc(x.name)}">${esc(x.name)}</button>`).join("");
+  el.list.querySelectorAll(".content-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>loadContent(items.find(x=>x.name===btn.dataset.name)));
+  });
+  if(!state.current || state.current.category!==state.category){
+    loadContent(items[0]);
+  }
+}
+function renderTabs(){
+  el.tabs.innerHTML=state.manifest.categories.map(c=>`<button class="tab${state.category===c?" active":""}" data-category="${esc(c)}">${esc(c)}</button>`).join("");
+  el.tabs.querySelectorAll(".tab").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      state.category=btn.dataset.category;
+      state.current=null;
+      renderTabs();
+      renderContentList();
+    });
+  });
+}
+async function init(){
+  try{
+    const res=await fetch("data/manifest.json",{cache:"no-store"});
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    state.manifest=await res.json();
+    el.update.textContent="최종 업데이트: "+state.manifest.updatedAt;
+    state.category=state.manifest.categories[0];
+    renderTabs();
+    renderContentList();
+  }catch(err){
+    el.area.innerHTML=`<div class="notice">확률정보 초기화에 실패했습니다.</div>`;
+    console.error(err);
+  }
+}
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+{
+  "title": "작전야구매니저 확률정보",
+  "source": "TSM_Probability_Public_20260911_044456.xlsx",
+  "updatedAt": "2026-09-11 04:44:56",
+  "categories": [
+    "드래프트",
+    "스카우트",
+    "선수조합",
+    "아이템"
+  ],
+  "contents": [
+    {
+      "name": "3성 드래프트",
+      "category": "드래프트",
+      "file": "data/draft-3.json",
+      "type": "player",
+      "summaryRows": 9,
+      "detailRows": 3492
+    },
+    {
+      "name": "4성 드래프트",
+      "category": "드래프트",
+      "file": "data/draft-4.json",
+      "type": "player",
+      "summaryRows": 4,
+      "detailRows": 2328
+    },
+    {
+      "name": "5성 드래프트",
+      "category": "드래프트",
+      "file": "data/draft-5.json",
+      "type": "player",
+      "summaryRows": 5,
+      "detailRows": 2910
+    },
+    {
+      "name": "3성 팀 드래프트",
+      "category": "드래프트",
+      "file": "data/team-draft-3.json",
+      "type": "player",
+      "summaryRows": 30,
+      "detailRows": 1746
+    },
+    {
+      "name": "4성 팀 드래프트",
+      "category": "드래프트",
+      "file": "data/team-draft-4.json",
+      "type": "player",
+      "summaryRows": 40,
+      "detailRows": 2328
+    },
+    {
+      "name": "5성 팀 드래프트",
+      "category": "드래프트",
+      "file": "data/team-draft-5.json",
+      "type": "player",
+      "summaryRows": 50,
+      "detailRows": 2910
+    },
+    {
+      "name": "3성 확정 드래프트",
+      "category": "드래프트",
+      "file": "data/fixed-draft-3.json",
+      "type": "player",
+      "summaryRows": 1,
+      "detailRows": 582
+    },
+    {
+      "name": "4성 확정 드래프트",
+      "category": "드래프트",
+      "file": "data/fixed-draft-4.json",
+      "type": "player",
+      "summaryRows": 1,
+      "detailRows": 582
+    },
+    {
+      "name": "5성 확정 드래프트",
+      "category": "드래프트",
+      "file": "data/fixed-draft-5.json",
+      "type": "player",
+      "summaryRows": 1,
+      "detailRows": 582
+    },
+    {
+      "name": "일반 스카우트",
+      "category": "스카우트",
+      "file": "data/scout-normal.json",
+      "type": "player",
+      "summaryRows": 21,
+      "detailRows": 12222
+    },
+    {
+      "name": "고급 스카우트",
+      "category": "스카우트",
+      "file": "data/scout-premium.json",
+      "type": "player",
+      "summaryRows": 60,
+      "detailRows": 19206
+    },
+    {
+      "name": "Edition 스카우트",
+      "category": "스카우트",
+      "file": "data/scout-edition.json",
+      "type": "player",
+      "summaryRows": 41,
+      "detailRows": 15474
+    },
+    {
+      "name": "Edition 스카우트 PLUS",
+      "category": "스카우트",
+      "file": "data/scout-edition-plus.json",
+      "type": "player",
+      "summaryRows": 59,
+      "detailRows": 15978
+    },
+    {
+      "name": "선수조합",
+      "category": "선수조합",
+      "file": "data/player-mix.json",
+      "type": "player",
+      "summaryRows": 55,
+      "detailRows": 3956
+    },
+    {
+      "name": "아이템 확률",
+      "category": "아이템",
+      "file": "data/item-probability.json",
+      "type": "item",
+      "summaryRows": 0,
+      "detailRows": 8
+    }
+  ]
+}
